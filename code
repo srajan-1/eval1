@@ -1,0 +1,48 @@
+shop = ["fruits", "wheat", "soaps", "utensils"]
+
+def add_item(item):
+    if item not in shop:
+        shop.append(item)
+    else:
+        print("Item already present")
+
+def remove_item(item):
+    if item in shop:
+        shop.remove(item)
+        print("Item removed successfully")
+    else:
+        print("Item not present")
+
+def search_item(item):
+    return item in shop
+
+def bsearch(l, r, item):
+    if l <= r:
+        m = (l + r) // 2
+        if shop[m] == item:
+            return True
+        elif shop[m] < item:
+            return bsearch(m + 1, r, item)
+        else:
+            return bsearch(l, m - 1, item)
+    return False
+
+def display():
+    print(shop)
+
+
+ip1 = input("Item to be added: ").strip()
+add_item(ip1)
+display()
+
+ip2 = input("Item to be deleted: ").strip()
+remove_item(ip2)
+display()
+
+ip3 = input("Item to be searched: ").strip()
+
+shop.sort()
+if bsearch(0, len(shop) - 1, ip3):
+    print("Item found in the shop")
+else:
+    print("Item not found in the shop")
